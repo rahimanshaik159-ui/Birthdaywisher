@@ -9,7 +9,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 const E = process.env,
   ROOT = path.resolve(E.UPLOAD_DIR || "./storage"),
-  PUB = E.PUBLIC_API_URL || `http://localhost:${E.PORT || 8787}`;
+  PUB = E.PUBLIC_API_URL || "https://birthdaywisher-api.onrender.com";
 fs.mkdirSync(ROOT, { recursive: true });
 fs.mkdirSync(path.dirname(path.resolve(E.DB_PATH || "./data/bw.sqlite")), {
   recursive: true,
