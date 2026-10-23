@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>BirthdayWisher – Create birthday wish websites</title>
+    <meta name="description"
+        content="Pick a template, add photos and a letter, and share a link that expires on the birthday.">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/experience.css">
+</head>
+
+<body>
+    <header class="nav">
+        <div class="wrap"><a class="logo" href="#home">Birthday<b>Wisher</b></a><button id="menu" aria-expanded="false"
+                aria-controls="links">Menu</button>
+            <nav class="links" id="links"><a href="#home">Home</a><a href="#templates">Templates</a><a href="#how">How
+                    It Works</a><a href="#features">Features</a><a href="#faq">FAQ</a></nav><a class="btn pri sm"
+                href="create.html">Create Now</a>
+        </div>
+    </header>
+    <main id="home">
+        <section class="hero-s">
+            <div class="wrap">
+                <div>
+                    <h1>Create Beautiful <span>Birthday</span> Wish Websites</h1>
+                    <p>Choose from 50 art-directed templates. Each one unfolds as a surprise: welcome, wishes, a letter, memories, candles, a cake to cut and a finale. Add your photos and words, then publish a unique link. The
+                        page expires automatically after the birthday and its photos are deleted from our storage.</p>
+                    <p><a class="btn pri" href="create.html">Create Birthday Website</a> <a class="btn"
+                            href="#templates">Explore Templates</a></p>
+                    <div class="checks"><span>50 templates</span><span>Unique
+                            link</span><span>Auto-expiry</span><span>Works on mobile</span></div>
+                </div>
+                <div>
+                    <div class="mock">
+                        <div class="bar"><i></i><i></i><i></i></div>
+                        <img id="heroPrev" src="res/template-previews/template-06.jpg" alt="Preview of the Midnight Cinema birthday experience" width="800" height="500" style="display:block;width:100%;height:auto">
+                    </div>
+                    <p class="tag">Sample content. Your photos and words replace it.</p>
+                </div>
+            </div>
+        </section>
+        <div class="wrap">
+            <div class="stats">
+                <div class="stat"><b>50</b>Original templates</div>
+                <div class="stat"><b>7</b>Scenes per surprise</div>
+                <div class="stat"><b>Link</b>Unique sharing URL</div>
+                <div class="stat"><b>Auto</b>Server-side expiry</div>
+            </div>
+        </div>
+        <section class="blk" id="templates">
+            <div class="wrap">
+                <h2>50 Birthday Experiences</h2>
+                <div class="tools"><input id="q" type="search" placeholder="Search templates"
+                        aria-label="Search templates"><select id="sort" aria-label="Sort">
+                        <option value="n">Default order</option>
+                        <option value="a">Name A–Z</option>
+                    </select></div>
+                <div class="chips" id="chips" role="group" aria-label="Categories"></div>
+                <p id="empty" hidden>No template matches. Clear the search or pick another category.</p>
+                <div class="grid" id="grid" style="margin-top:20px"></div>
+                <p><button class="btn" id="all"></button></p>
+            </div>
+        </section>
+        <section class="blk" id="how" style="background:var(--sky)">
+            <div class="wrap">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step"><b>1</b>
+                        <h3>Choose a template</h3>
+                        <p>Browse 50 designs and play through each one before you choose.</p>
+                    </div>
+                    <div class="step"><b>2</b>
+                        <h3>Add personal details</h3>
+                        <p>Names, photos, wishes, a letter, music and scene order. Everything updates live.</p>
+                    </div>
+                    <div class="step"><b>3</b>
+                        <h3>Preview and publish</h3>
+                        <p>Photos upload only when you confirm. Expiry is shown before you publish.</p>
+                    </div>
+                    <div class="step"><b>4</b>
+                        <h3>Share your link</h3>
+                        <p>The page stops loading at the end of the birthday in your timezone, then files are deleted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="blk" id="features">
+            <div class="wrap">
+                <h2>Features</h2>
+                <div class="feat">
+                    <div>
+                        <h3>Personalization</h3>
+                        <p>Names, nickname, signature, every scene's wording, accent color, font and alignment.</p>
+                    </div>
+                    <div>
+                        <h3>Photo galleries</h3>
+                        <p>Main portrait plus up to 9 memories, with captions, focus controls and per-scene photo choices.</p>
+                    </div>
+                    <div>
+                        <h3>Effects</h3>
+                        <p>Candles you can blow out (tap, button or optional microphone), a cake you can cut, confetti and fireworks. Reduced-motion is respected.</p>
+                    </div>
+                    <div>
+                        <h3>Mobile-friendly</h3>
+                        <p>Every template is responsive.</p>
+                    </div>
+                    <div>
+                        <h3>Unique links</h3>
+                        <p>Readable slug, opaque internal ID, secret edit token.</p>
+                    </div>
+                    <div>
+                        <h3>Expiration</h3>
+                        <p>Enforced by the server on every request, plus scheduled cleanup of records and photos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="blk" id="faq" style="background:var(--sky)">
+            <div class="wrap" style="max-width:820px">
+                <h2>FAQ</h2>
+                <details>
+                    <summary>When does my page expire?</summary>
+                    <p>At 23:59:59 on the birthday date in the timezone you choose. The server refuses to serve it after
+                        that, even if cleanup is delayed.</p>
+                </details>
+                <details>
+                    <summary>What happens to my photos?</summary>
+                    <p>They are uploaded only when you press Publish and stored on the backend. After expiry they are
+                        deleted by a scheduled job with retries. Backups of the hosting provider may keep copies for
+                        their own retention period.</p>
+                </details>
+                <details>
+                    <summary>Do I need an account?</summary>
+                    <p>No. Publishing returns a secret edit token that lets you delete the page early. Keep it private.
+                    </p>
+                </details>
+                <details>
+                    <summary>Is background music included?</summary>
+                    <p>Yes, optional. Four original tracks are generated in the browser (no audio files, no licensing issues) and never start until the visitor taps. You can also add your own licensed audio files. See ASSETS.md.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+    <footer class="f">
+        <div class="wrap">© BirthdayWisher. Pages and photos are removed after the birthday. See <a href="#faq">FAQ</a>.
+        </div>
+    </footer>
+    <dialog id="dlg" aria-labelledby="dn">
+        <div class="dh"><strong id="dn"></strong><span><a class="btn pri sm" id="du">Use This Template</a> <button
+                    class="btn sm" id="dc" type="button">Close</button></span></div>
+        <div id="dp"></div>
+        <p class="tag" style="padding:0 18px 14px" id="dseq"></p>
+    </dialog>
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

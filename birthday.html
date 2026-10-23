@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1f4d">
+  <title>Happy Birthday</title>
+  <link rel="stylesheet" href="css/experience.css">
+  <style>
+    html, body { margin: 0; height: 100%; background: #0b1020; font-family: system-ui, sans-serif }
+    #app { position: fixed; inset: 0; height: 100vh; height: 100dvh }
+    .bw-note { min-height: 100%; display: grid; place-content: center; text-align: center; padding: 24px; color: #e8eeff; gap: 8px }
+    .bw-note h1 { margin: 0; font-size: clamp(24px, 5vw, 38px) }
+    .bw-note p { margin: 0; opacity: .8; max-width: 32em }
+    .bw-note a { color: #9ec1ff }
+    .bw-spin { width: 38px; height: 38px; border-radius: 50%; border: 4px solid #ffffff33; border-top-color: #fff; margin: 0 auto 12px; animation: sp 1s linear infinite }
+    @keyframes sp { to { transform: rotate(360deg) } }
+    @media (prefers-reduced-motion: reduce) { .bw-spin { animation: none } }
+  </style>
+</head>
+<body>
+  <div id="app" role="main"><div class="bw-note" role="status"><div><div class="bw-spin" aria-hidden="true"></div>Loading your surprise…</div></div></div>
+  <noscript><p style="color:#fff;padding:24px">This birthday surprise needs JavaScript to play.</p></noscript>
+  <script type="module">
+    import { Player, specById } from "./js/engine.js";
+    import { API_URL } from "./js/config.js";
+    // The slug comes from ?s=SLUG (what 404.html / server.py redirect to) or directly from /birthday/SLUG.
+    const slug = new URLSearchParams(location.search).get("s") || (location.pathname.match(/\/birthday\/([a-z0-9-]{1,40})\/?$/) || [])[1] || "";
+    const app = document.getElementById("app");
+    let player = null, expiryTimer = 0, poll = 0, gone = false;
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+    const note = (h, p, extra = "") => { app.innerHTML = `<div class="bw-note"><div><h1>${h}</h1><p>${p}</p>${extra}</div></div>`; };
+    function stop() { clearTimeout(expiryTimer); clearInterval(poll); player?.destroy(); player = null; }
+    function expired() { if (gone) return; gone = true; stop(); document.title = "Expired"; note("This birthday page has expired", "Birthday pages are removed after the birthday, together with their photos."); }
+    async function fetchPage() { return fetch(`${API_URL}/api/pages/${encodeURIComponent(slug)}`, { cache: "no-store" }); }
+    async function revalidate() { if (gone || !player) return; try { const r = await fetchPage(); if (r.status === 410 || r.status === 404) expired(); } catch { /* offline: keep playing what is already loaded */ } }
+    async function main() {
+      if (!/^[a-z0-9-]{1,40}$/.test(slug)) return note("Page not found", "Check the link you were sent.");
+      let r;
+      try { r = await fetchPage(); } catch { return note("Could not load the page", "The server is unreachable. Try again in a moment.", '<p><button onclick="location.reload()" style="margin-top:12px;padding:10px 18px;border-radius:10px;border:0;font:inherit;cursor:pointer">Try again</button></p>'); }
+      if (r.status === 410) return expired();
+      if (!r.ok) return note("Page not found", "This page does not exist, or it has already expired and been removed. Check the link you were sent.");
+      const d = await r.json();
+      document.title = "Happy Birthday " + (d.nickname || d.name);
+      app.innerHTML = "";
+      player = new Player(app, { template: specById(d.template).id, data: d, mode: "full" });
+      app.dataset.slug = slug;
+      const ex = d.expiresAt - Date.now(); // browser timer is only a convenience: the server enforces expiry (410) and cleanup
+      if (ex > 0 && ex < 2 ** 31) expiryTimer = setTimeout(expired, ex); else if (ex <= 0) return expired();
+      poll = setInterval(revalidate, 90000);
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) revalidate(); });
+    }
+    addEventListener("pagehide", stop);
+    main();
+  </script>
+</body>
+</html>

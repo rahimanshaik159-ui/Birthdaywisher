@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS pages(
+ id TEXT PRIMARY KEY, slug TEXT UNIQUE NOT NULL, token_hash TEXT NOT NULL,
+ data TEXT NOT NULL, tz TEXT NOT NULL, expires_at INTEGER NOT NULL, created_at INTEGER NOT NULL,
+ status TEXT NOT NULL DEFAULT 'active', del_attempts INTEGER NOT NULL DEFAULT 0);
+CREATE INDEX IF NOT EXISTS idx_exp ON pages(expires_at);

@@ -1,0 +1,25 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Local database and uploaded photos
+backend/data/
+backend/storage/
+backend/uploads/
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local Python cache
+__pycache__/
+*.pyc

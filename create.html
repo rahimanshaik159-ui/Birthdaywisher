@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create – BirthdayWisher</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/experience.css">
+</head>
+
+<body>
+    <header class="nav">
+        <div class="wrap"><a class="logo" href="index.html">Birthday<b>Wisher</b></a></div>
+    </header>
+    <main class="wrap wz">
+        <div>
+            <h1 id="st">Choose a template</h1>
+            <ol class="prog" id="prog" aria-label="Progress">
+                <li></li><li></li><li></li><li></li><li></li><li></li>
+            </ol>
+            <form id="f" novalidate onsubmit="return false">
+                <section data-s="0">
+                    <div class="template-toolbar">
+                        <div class="tools"><input id="q" type="search" placeholder="Search templates" aria-label="Search">
+                        </div>
+                        <div class="nav2" id="wizard-nav"><button class="btn" id="bk" type="button">Back</button><button class="btn pri" id="nx"
+                                type="button">Next</button></div>
+                    </div>
+                    <div class="chips" id="chips"></div>
+                    <div class="grid" id="grid" style="margin-top:16px"></div>
+                </section>
+                <section data-s="1" hidden>
+                    <div class="two">
+                        <div class="fld"><label for="from">Your name</label><input id="from" maxlength="60" required>
+                        </div>
+                        <div class="fld"><label for="name">Birthday person's name</label><input id="name" maxlength="60"
+                                required></div>
+                    </div>
+                    <div class="two">
+                        <div class="fld"><label for="rel">Relationship</label><select id="rel">
+                                <option>Best Friend</option>
+                                <option>Friend</option>
+                                <option>Brother</option>
+                                <option>Sister</option>
+                                <option>Partner</option>
+                                <option>Mother</option>
+                                <option>Father</option>
+                                <option>Cousin</option>
+                                <option>Classmate</option>
+                                <option>Other</option>
+                            </select></div>
+                        <div class="fld"><label for="nick">Nickname (optional)</label><input id="nick" maxlength="40">
+                        </div>
+                    </div>
+                    <div class="two">
+                        <div class="fld"><label for="date">Birthday date</label><input id="date" type="date" required>
+                        </div>
+                        <div class="fld"><label for="tz">Timezone</label><input id="tz" list="tzs"><datalist
+                                id="tzs"></datalist></div>
+                    </div>
+                    <p class="tag" id="exp"></p>
+                    <div class="fld"><label for="greet">Welcome message (shown on the first screen)</label><input id="greet" maxlength="200"></div>
+                    <div class="fld"><label for="letter">Personal letter <small>(use {name} for their name)</small></label><textarea id="letter" rows="8" maxlength="3000"></textarea><button class="btn sm" type="button" id="rl" style="justify-self:start">Use suggested letter</button></div>
+                    <div class="two">
+                        <div class="fld"><label for="sig">Signature (optional)</label><input id="sig" maxlength="80">
+                        </div>
+                        <div class="fld"><label for="share">Share message (optional)</label><input id="share"
+                                maxlength="140" placeholder="Something for you:"></div>
+                    </div>
+                </section>
+                <section data-s="2" hidden>
+                    <div class="fld"><label for="files">Photos (JPEG, PNG or WebP, up to 5 MB each, max 10). The first is the main portrait.</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
+                    <div class="thumbs" id="th"></div>
+                    <fieldset class="fs" id="assign"><legend>Which photos appear where?</legend><p class="tag">Leave these as they are for a sensible automatic arrangement.</p><div id="asg"></div></fieldset>
+                </section>
+                <section data-s="3" hidden>
+                    <p class="tag">Every line below appears in the published experience. Leave a field empty to use the template's own wording.</p>
+                    <div class="two"><div class="fld"><label for="t-welcomeKicker">Welcome line above the name</label><input id="t-welcomeKicker" maxlength="80"></div><div class="fld"><label for="t-cta">Start button text</label><input id="t-cta" maxlength="40"></div></div>
+                    <div class="fld"><label for="t-wishes">Birthday wishes message</label><textarea id="t-wishes" rows="3" maxlength="1500"></textarea></div>
+                    <fieldset class="fs"><legend>Highlighted wishes (up to 6, shown as chips or cards)</legend><div class="two"><input id="t-h0" maxlength="40" aria-label="Highlight 1"><input id="t-h1" maxlength="40" aria-label="Highlight 2"><input id="t-h2" maxlength="40" aria-label="Highlight 3"><input id="t-h3" maxlength="40" aria-label="Highlight 4"><input id="t-h4" maxlength="40" aria-label="Highlight 5"><input id="t-h5" maxlength="40" aria-label="Highlight 6"></div></fieldset>
+                    <div class="fld"><label for="t-wishPrompt">Make-a-wish instruction (cake scene)</label><input id="t-wishPrompt" maxlength="300"></div>
+                    <div class="two"><div class="fld"><label for="t-wishMadeTitle">After blowing the candles: title</label><input id="t-wishMadeTitle" maxlength="80"></div><div class="fld"><label for="t-wishMade">After blowing the candles: message</label><input id="t-wishMade" maxlength="400"></div></div>
+                    <div class="two"><div class="fld"><label for="t-cutTitle">After cutting the cake: title</label><input id="t-cutTitle" maxlength="80"></div><div class="fld"><label for="t-cut">After cutting the cake: message</label><input id="t-cut" maxlength="400"></div></div>
+                    <div class="two"><div class="fld"><label for="t-finalKicker">Finale line above "Happy Birthday"</label><input id="t-finalKicker" maxlength="80"></div><div class="fld"><label for="t-final">Closing message</label><input id="t-final" maxlength="600"></div></div>
+                    <button class="btn sm" type="button" id="rt">Reset all wording to suggestions</button>
+                </section>
+                <section data-s="4" hidden>
+                    <fieldset class="fs"><legend>Scenes: reorder, hide or rename</legend><p class="tag">The welcome and finale scenes are always first and last. Use the preview on the right to look at each scene.</p><ol id="scl" class="scl"></ol><button class="btn sm" type="button" id="rs">Restore template order</button></fieldset>
+                    <fieldset class="fs"><legend>Music (optional)</legend><div class="two"><div class="fld"><label for="music">Background music</label><select id="music"></select></div><div class="fld"><label>&nbsp;</label><button class="btn" type="button" id="tm" aria-pressed="false">▶ Try this music</button></div></div><p class="tag">Music never starts by itself: the visitor starts it by tapping the start button, and can mute it with the music button. Tracks are generated in the browser. To add your own licensed audio, see ASSETS.md.</p></fieldset>
+                    <fieldset class="fs"><legend>Look &amp; motion</legend>
+                    <div class="two"><div class="fld"><label for="acc">Accent color</label><div style="display:flex;gap:8px;align-items:center"><input id="acc" type="color" style="width:64px;padding:2px"><label style="font-weight:400"><input type="checkbox" id="accDef" checked> Use template colour</label></div></div><div class="fld"><label for="fnt">Heading font</label><select id="fnt"><option value="">Template default</option><option value="0">Serif</option><option value="1">Sans</option><option value="2">Mono</option><option value="3">Script</option><option value="4">Display</option></select></div></div>
+                    <div class="two"><div class="fld"><label for="aln">Text alignment</label><select id="aln"><option value="">Template default</option><option>left</option><option>right</option><option>center</option></select></div><div class="fld"><label for="ani">Animation intensity</label><select id="ani"><option value="calm">Calm (no floating particles)</option><option value="normal" selected>Normal</option><option value="lively">Lively (extra celebration)</option></select></div></div>
+                    <label><input type="checkbox" id="cf"> Falling confetti in the background</label>
+                    <p class="tag">Visitors who prefer reduced motion automatically get a calmer version. Blowing out the candles works by tap, by button, or (optionally, with permission) by blowing into the microphone.</p></fieldset>
+                </section>
+                <section data-s="5" hidden>
+                    <div id="sum"></div><label><input type="checkbox" id="ok"> I confirm I may share these photos and want to publish this page now.</label>
+                    <div class="err" id="perr" role="alert"></div>
+                    <div id="res"></div>
+                </section>
+                <div class="err" id="err" role="alert"></div>
+            </form>
+        </div>
+        <aside class="live" aria-label="Live preview">
+            <div class="seg"><button class="btn sm" type="button" data-w="" aria-pressed="true">Desktop</button><button class="btn sm" type="button" data-w="m" aria-pressed="false">Mobile</button><button class="btn sm pri" type="button" id="full">▶ Play full experience</button></div>
+            <div class="frame" id="frame"><div id="pl" style="width:100%;height:100%"></div></div>
+            <div class="scn" id="scn" role="group" aria-label="Preview a scene"></div>
+            <p class="tag">Preview changes instantly. Photos stay in your browser until you publish.</p>
+        </aside>
+    </main>
+    <dialog id="fd" aria-label="Full preview"><div class="dh"><strong>Full experience preview</strong><button class="btn sm" id="fdc" type="button">Close</button></div><div class="pv"><div id="fdp" style="width:100%;height:100%"></div></div></dialog>
+    <script type="module" src="js/create.js"></script>
+</body>
+
+</html>

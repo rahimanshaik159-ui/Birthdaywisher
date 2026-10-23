@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Experience harness (dev/test only)</title>
+<link rel="stylesheet" href="../css/experience.css">
+<style>html,body{margin:0;height:100%;background:#222}#r{position:fixed;inset:0}</style>
+<div id="r"></div>
+<script type="module">
+  // Dev/test harness: mounts one Player. Query: t=NN  mode=full|preview|thumb  s=scene  manual=1  data=<json>
+  import { Player } from "../js/engine.js";
+  import { SAMPLE } from "../js/story.js";
+  const q = new URLSearchParams(location.search);
+  window.__errs = [];
+  addEventListener("error", (e) => __errs.push(e.message));
+  addEventListener("unhandledrejection", (e) => __errs.push(String(e.reason)));
+  const base0 = q.get("data") ? JSON.parse(q.get("data")) : SAMPLE;
+  const base = { ...base0, photos: (base0.photos || []).map((p) => ({ ...p, url: /^(https?:|\/|blob:)/.test(p.url) ? p.url : "../" + p.url })) }; // samples live in /res, the harness in /scripts
+  window.SAMPLE = SAMPLE;
+  window.mk = (over = {}, t) => { window.P?.destroy(); window.P = new Player(document.getElementById("r"), { template: "template-" + (t || q.get("t") || "06").padStart(2, "0"), data: { ...base, ...over }, mode: q.get("mode") || "full", scene: q.get("s") }); return window.P; };
+  if (!q.has("manual")) mk();
+  window.ready = true;
+</script>

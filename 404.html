@@ -1,0 +1,7 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Redirecting…</title>
+<script>
+    // GitHub Pages fallback: /repo/birthday/<slug> -> /repo/birthday.html?s=<slug>
+    var m = location.pathname.match(/^(.*?)\/birthday\/([a-z0-9-]{1,40})\/?$/);
+    if (m) location.replace(m[1] + '/birthday.html?s=' + m[2]); else document.write('<p>Page not found. <a href="./">Go home</a></p>');</script>
